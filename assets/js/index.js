@@ -1,15 +1,25 @@
+function convertsPokemonTypesToLi(pokemonTypes) {
+    return pokemonTypes.map(typeSlot => `<li class="type">${typeSlot.type.name}</li>`).join('')
+}
+
+function getPokemonImg(pokemon) {
+    return 
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 function pokemonToLi(pokemon){
     return `<li class="pokemon">
-    <span class="number">#001</span>
-    <span class="name">${pokemon.name}</span>
+    <span class="number">#${pokemon.order}</span>
+    <span class="name">${capitalizeFirstLetter(pokemon.name)}</span>
 
     <div class="detail">
         <ol class="types">
-            <li class="type">grass</li>
-            <li class="type">poison</li>
+            ${convertsPokemonTypesToLi(pokemon.types)}
         </ol>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/9.svg"
-            alt="${pokemon.name}">
+        <img src=${pokemon.sprites.other.dream_world.front_default} alt="${pokemon.name}">
     </div>
 </li>`
 }
