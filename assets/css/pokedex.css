@@ -17,7 +17,7 @@
 .water {
     background-color: #678fee;
 }
-.eletric{
+.electric{
     background-color:  #f7cf2e;
 }
 .ice {
@@ -32,7 +32,7 @@
 .poison {
     background-color: #a040a0;
 }
-.fightin{
+.fighting{
     background-color: #bf3029;
 }
 .psychic{
@@ -127,6 +127,11 @@
     border-radius: 1rem;
     padding: .25rem 1rem;
     margin: .25rem 0;
+}
+
+.pagination button:hover {
+    cursor: pointer;
+    background-color: #5a67b9;
 }
 
 @media screen and (min-width: 768px) {
