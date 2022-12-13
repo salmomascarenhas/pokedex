@@ -1,11 +1,14 @@
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+const loadMoreButton = document.getElementById('LoadMoreButton')
+const pokemonList = document.getElementById('pokemons')
+
+let offset = 0
+const limit = 10
+const maxRecords = 151
 
 function pokemonToLi(pokemon){
     return `<li class="pokemon ${pokemon.type}">
     <span class="number">#${pokemon.number}</span>
-    <span class="name">${capitalizeFirstLetter(pokemon.name)}</span>
+    <span class="name">${pokemon.name}</span>
 
     <div class="detail">
         <ol class="types">
@@ -16,6 +19,24 @@ function pokemonToLi(pokemon){
 </li>`
 }
 
-pokeapi.getPokemons(0,10)
-    .then((pokemons = []) => {
-        document.getElementById('pokemons').innerHTML = pokemons.map(pokemonToLi).join('')})
+function loadPokemonItens(offset, limit){
+    pokeapi.getPokemons(offset, limit)
+        .then((pokemons = []) => {
+            pokemonList.innerHTML += pokemons.map(pokemonToLi).join('')})
+}
+
+loadPokemonItens(offset,limit)
+
+loadMoreButton.addEventListener('click',e => {
+    offset += limit
+    const countRecordNextPage = offset + limit
+
+    if(countRecordNextPage >= maxRecords){
+        const newLimit = maxRecords - offset
+        loadPokemonItens(offset, newLimit)
+
+        loadMoreButton.parentElement.removeChild(loadMoreButton)
+    } else{
+        loadPokemonItens(offset,limit)
+    }
+})
